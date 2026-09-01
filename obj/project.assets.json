@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "E:\\usuarios\\0082931\\.nuget\\packages\\": {}
+    "D:\\usuarios\\0082934\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\usuarios\\0082931\\Documents\\Biblioteca_Escolar\\Biblioteca_Escolar.csproj",
+      "projectUniqueName": "D:\\usuarios\\0082934\\Documents\\Biblioteca_Escolar_LPII\\Biblioteca_Escolar.csproj",
       "projectName": "Biblioteca_Escolar",
-      "projectPath": "E:\\usuarios\\0082931\\Documents\\Biblioteca_Escolar\\Biblioteca_Escolar.csproj",
-      "packagesPath": "E:\\usuarios\\0082931\\.nuget\\packages\\",
-      "outputPath": "E:\\usuarios\\0082931\\Documents\\Biblioteca_Escolar\\obj\\",
+      "projectPath": "D:\\usuarios\\0082934\\Documents\\Biblioteca_Escolar_LPII\\Biblioteca_Escolar.csproj",
+      "packagesPath": "D:\\usuarios\\0082934\\.nuget\\packages\\",
+      "outputPath": "D:\\usuarios\\0082934\\Documents\\Biblioteca_Escolar_LPII\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "E:\\usuarios\\0082931\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\usuarios\\0082934\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
