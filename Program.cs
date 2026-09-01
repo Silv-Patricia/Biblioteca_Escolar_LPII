@@ -10,7 +10,7 @@ namespace Biblioteca_Escolar {
                 Console.WriteLine("2 - Cadastrar material\t\t7- Registrar devolução");
                 Console.WriteLine("3 - Listar usuários\t\t8 - Exibir empréstimos ativos");
                 Console.WriteLine("4 - Listar materiais\t\t9 - Exibir relatório");
-                Console.WriteLine("5 - Consultar por código\t0 - Sair da Execução");
+                //Console.WriteLine("5 - Consultar por código\t0 - Sair da Execução");
                 Console.WriteLine("*************************************************");
 
                 opc = Console.ReadLine() ?? "";
