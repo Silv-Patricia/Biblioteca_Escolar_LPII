@@ -1,21 +1,62 @@
 ﻿
-namespace Biblioteca_Escolar {
-    class Program {
-        static void Main() {
-            string opc;
-            
-            do {
-                Console.WriteLine("\n***********************Menu**********************");
-                Console.WriteLine("1 - Cadastrar usuário\t\t6 - Realizar empréstimo");
-                Console.WriteLine("2 - Cadastrar material\t\t7- Registrar devolução");
-                Console.WriteLine("3 - Listar usuários\t\t8 - Exibir empréstimos ativos");
-                Console.WriteLine("4 - Listar materiais\t\t9 - Exibir relatório");
-                Console.WriteLine("5 - Consultar por código\t0 - Sair da Execução");
-                Console.WriteLine("*************************************************");
+namespace Biblioteca_Escolar
+{
+    class Program
+    {
+        static string LeEntrada() => Console.ReadLine() ?? "";
+        static int LerInteiro(string mensagem)
+        {
+            while (true)
+            {
+                Console.Write(mensagem);
+                if (int.TryParse(Console.ReadLine(), out int valor))
+                {
+                    return valor;
+                }
+                Console.WriteLine("Entrada inválida! Digite um número inteiro.");
+            }
+        }
 
-                opc = Console.ReadLine() ?? "";
+        static void PausarELimpar()
+        {
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey(true);
+            Console.Clear();
+        }
 
-            } while (!int.TryParse(opc, out int op));
+        static int Menu()
+        {
+            Console.WriteLine("\n********************** MENU *********************");
+            Console.WriteLine("1 - Cadastrar usuário\t\t6 - Realizar empréstimo");
+            Console.WriteLine("2 - Cadastrar material\t\t7- Registrar devolução");
+            Console.WriteLine("3 - Listar usuários\t\t8 - Exibir empréstimos ativos");
+            Console.WriteLine("4 - Listar materiais\t\t9 - Exibir relatório");
+            Console.WriteLine("5 - Consultar por código\t0 - Sair da Execução");
+            Console.WriteLine("*************************************************");
+            return LerInteiro("Digite sua opção: ");
+        }
+        static void Main()
+        {
+            do
+            {
+                int opcao = Menu();
+                switch (opcao)
+                {
+                    case 0:
+                        Console.Write("Deseja realmente sair? (S/N): ");
+                        string confirma = LeEntrada().Trim().ToUpper();
+                        if (confirma == "S")
+                        {
+                            Console.WriteLine("\nPROGRAMA ENCERRADO!");
+                            return;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("\nOPÇÂO INVÁLIDA!");
+                        break;
+                }
+                PausarELimpar();
+            } while (true);
         }
     }
 }
