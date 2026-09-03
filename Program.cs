@@ -59,6 +59,11 @@ namespace Biblioteca_Escolar
                     case 2:
                      biblioteca.CadastrarMaterial();
                     break;
+
+                    case 3:
+                     biblioteca.ListarUsuarios();
+                    break;
+
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;

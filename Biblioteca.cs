@@ -90,5 +90,23 @@ namespace Biblioteca_Escolar {
             }
 
         }
+
+        public bool ListaVazia<T>(List<T> lista) {
+            if (lista.Count == 0) {
+                return true;
+            }
+            return false;
+        }
+
+        public void ListarUsuarios() {
+            if (ListaVazia(Usuarios)) {
+                Console.WriteLine("Lista Vazia!");
+            }
+            else {
+                foreach (Usuario u in Usuarios) {
+                    Console.WriteLine(u);
+                }
+            }
+        }
     }
 }
