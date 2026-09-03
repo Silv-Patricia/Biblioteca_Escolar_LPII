@@ -42,11 +42,13 @@ namespace Biblioteca_Escolar {
                 Console.WriteLine("\n****** Qual tipo de material deseja cadastrar? ******");
                 Console.WriteLine("1 - Livro");
                 Console.WriteLine("2 - Revista");
+                Console.Write("Opção: ");
                 string op = Console.ReadLine() ?? "";
 
                 if (int.TryParse(op, out opc) && (opc == 1 || opc == 2)) {
                     break;
                 }
+                Console.WriteLine("Digite um valor válido!");
             }
 
             Console.Write("Digite o código do material: ");
@@ -57,45 +59,36 @@ namespace Biblioteca_Escolar {
                     Console.WriteLine("Erro: Já existe um material cadastrado com este código!");
                     return;
                 }
-
-                Console.Write("Digite o título: ");
-                titulo = Console.ReadLine() ?? "";
-
-                Console.Write("Digite o ano de publicação: ");
-                int.TryParse(Console.ReadLine(), out ano);
-
-                try {
-                    if (opc == 1) {
-                        Console.Write("Digite o nome do autor: ");
-                        string autor = Console.ReadLine() ?? "";
-
-                        Livro novoLivro = new Livro(codigo, titulo, ano, autor);
-                        Materiais.Add(novoLivro);
-                        Console.WriteLine("Livro cadastrado com sucesso!");
-                    }
-
-                    Console.WriteLine("Usuário cadastrado com sucesso!");
-                }
-                catch (ArgumentException erro) {
-                    Console.WriteLine($"Erro ao cadastrar: {erro.Message}");
-                }
             }
-
             Console.Write("Digite o título: ");
             titulo = Console.ReadLine() ?? "";
 
             Console.Write("Digite o ano de publicação: ");
             int.TryParse(Console.ReadLine(), out ano);
 
-            switch (opc) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-                    Console.WriteLine("Opção Inválida!");
-                    break;
+            try {
+                if (opc == 1) {
+                    Console.Write("Digite o nome do autor: ");
+                    string autor = Console.ReadLine() ?? "";
+
+                    Livro novoLivro = new Livro(codigo, titulo, ano, autor);
+                    Materiais.Add(novoLivro);
+                    Console.WriteLine("Livro cadastrado com sucesso!");
+                }
+                else {
+                    Console.Write("Digite o numero da Edição: ");
+                    int.TryParse(Console.ReadLine(), out int numeroEdicao);
+
+                    Revista novaRevista = new Revista(codigo, titulo, ano, numeroEdicao);
+                    Materiais.Add(novaRevista);
+                    Console.WriteLine("Revista cadastrada com sucesso!");
+
+                }
             }
+            catch (ArgumentException erro) {
+                Console.WriteLine($"Erro ao cadastrar: {erro.Message}");
+            }
+
         }
     }
 }
