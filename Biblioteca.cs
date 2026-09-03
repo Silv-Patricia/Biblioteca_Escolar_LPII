@@ -1,3 +1,101 @@
 namespace Biblioteca_Escolar {
-    
+    class Biblioteca {
+        private List<Usuario> Usuarios = new List<Usuario>();
+        private List<MaterialBiblioteca> Materiais = new List<MaterialBiblioteca>();
+        private List<Emprestimo> Emprestimos = new List<Emprestimo>();
+
+        public void CadastrarUsuario() {
+            String matricula, nome, email;
+            Console.WriteLine("Digite sua matricula:");
+            matricula = Console.ReadLine() ?? " ";
+
+            foreach (Usuario u in Usuarios) {
+                if (u.Matricula == matricula) {
+                    Console.WriteLine("Erro: Já existe um usuário cadastrado com esta matrícula!");
+                    return;
+                }
+            }
+
+            Console.Write("Digite o nome: ");
+            nome = Console.ReadLine() ?? "";
+
+            Console.Write("Digite o e-mail: ");
+            email = Console.ReadLine() ?? "";
+
+            try {
+                Usuario novoUsuario = new Usuario(matricula, nome, email);
+                Usuarios.Add(novoUsuario);
+
+                Console.WriteLine("Usuário cadastrado com sucesso!");
+            }
+            catch (ArgumentException erro) {
+                Console.WriteLine($"Erro ao cadastrar: {erro.Message}");
+            }
+
+        }
+
+        public void CadastrarMaterial() {
+            int opc, ano;
+            string codigo, titulo;
+
+            while (true) {
+                Console.WriteLine("\n****** Qual tipo de material deseja cadastrar? ******");
+                Console.WriteLine("1 - Livro");
+                Console.WriteLine("2 - Revista");
+                string op = Console.ReadLine() ?? "";
+
+                if (int.TryParse(op, out opc) && (opc == 1 || opc == 2)) {
+                    break;
+                }
+            }
+
+            Console.Write("Digite o código do material: ");
+            codigo = Console.ReadLine() ?? "";
+
+            foreach (MaterialBiblioteca mb in Materiais) {
+                if (mb.Codigo == codigo) {
+                    Console.WriteLine("Erro: Já existe um material cadastrado com este código!");
+                    return;
+                }
+
+                Console.Write("Digite o título: ");
+                titulo = Console.ReadLine() ?? "";
+
+                Console.Write("Digite o ano de publicação: ");
+                int.TryParse(Console.ReadLine(), out ano);
+
+                try {
+                    if (opc == 1) {
+                        Console.Write("Digite o nome do autor: ");
+                        string autor = Console.ReadLine() ?? "";
+
+                        Livro novoLivro = new Livro(codigo, titulo, ano, autor);
+                        Materiais.Add(novoLivro);
+                        Console.WriteLine("Livro cadastrado com sucesso!");
+                    }
+
+                    Console.WriteLine("Usuário cadastrado com sucesso!");
+                }
+                catch (ArgumentException erro) {
+                    Console.WriteLine($"Erro ao cadastrar: {erro.Message}");
+                }
+            }
+
+            Console.Write("Digite o título: ");
+            titulo = Console.ReadLine() ?? "";
+
+            Console.Write("Digite o ano de publicação: ");
+            int.TryParse(Console.ReadLine(), out ano);
+
+            switch (opc) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    Console.WriteLine("Opção Inválida!");
+                    break;
+            }
+        }
+    }
 }

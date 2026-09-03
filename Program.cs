@@ -3,6 +3,7 @@ namespace Biblioteca_Escolar
 {
     class Program
     {
+        static Biblioteca biblioteca = new Biblioteca();
         static string LeEntrada() => Console.ReadLine() ?? "";
         static int LerInteiro(string mensagem)
         {
@@ -28,7 +29,7 @@ namespace Biblioteca_Escolar
         {
             Console.WriteLine("\n********************** MENU *********************");
             Console.WriteLine("1 - Cadastrar usuário\t\t6 - Realizar empréstimo");
-            Console.WriteLine("2 - Cadastrar material\t\t7- Registrar devolução");
+            Console.WriteLine("2 - Cadastrar material\t\t7 - Registrar devolução");
             Console.WriteLine("3 - Listar usuários\t\t8 - Exibir empréstimos ativos");
             Console.WriteLine("4 - Listar materiais\t\t9 - Exibir relatório");
             Console.WriteLine("5 - Consultar por código\t0 - Sair da Execução");
@@ -51,6 +52,9 @@ namespace Biblioteca_Escolar
                             return;
                         }
                         break;
+                    case 1:
+                     biblioteca.CadastrarUsuario();
+                    break;
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;
