@@ -100,6 +100,16 @@ namespace Biblioteca_Escolar {
 
         public void ListarUsuarios() {
             if (ListaVazia(Usuarios)) {
+                Console.WriteLine("Nenhum usuário cadastrado!, Impossivel exibir!");
+            }
+            else {
+                foreach (Usuario u in Usuarios) {
+                    Console.WriteLine(u);
+                }
+            }
+        }
+        public void ListarMateriais() {
+            if (ListaVazia(Materiais)) {
                 Console.WriteLine("Lista Vazia!");
             }
             else {
