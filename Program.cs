@@ -72,6 +72,10 @@ namespace Biblioteca_Escolar
                      biblioteca.MostarBuscarPorCodigo();
                     break;
 
+                    case 6:
+                     //biblioteca.RealizarEmprestimo();
+                    break;
+
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;

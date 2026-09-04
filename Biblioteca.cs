@@ -114,23 +114,11 @@ namespace Biblioteca_Escolar {
                 return;
             }
 
-            foreach (Usuario u in Usuarios) {
-                Console.WriteLine(u);
-            }
-        }
-        public bool LivroExiste(string codigo) {
-            if (ListaVazia(Materiais)) {
-                return false;
-            }
-
             foreach (MaterialBiblioteca mb in Materiais) {
-                if (mb.Codigo == codigo) {
-                    return true;
-                }
-
+                Console.WriteLine(mb);
             }
-            return false;
         }
+
         public void MostarBuscarPorCodigo() {
             if (ListaVazia(Materiais)) {
                 Console.WriteLine("Nenhum material Cadastrado!");
@@ -148,12 +136,27 @@ namespace Biblioteca_Escolar {
                         Console.WriteLine(mb);
                         return;
                     }
-                    Console.WriteLine($"Livro com código: \"{codigoBusca}\" não encontrado!");
                 }
+                Console.WriteLine($"Livro com código: \"{codigoBusca}\" não encontrado!");
             }
         }
+        public bool PodeRealizarEmprestimo(Usuario usuario) {
+            int totalEmprestimosAtivos = 0;
+            foreach (Emprestimo emp in Emprestimos) {
+                if (emp.Usuario.Matricula == usuario.Matricula && emp.DataDevolucaoReal == null) {
+                    totalEmprestimosAtivos++;
+                }
+            }
 
-// código em construção outro dia termino
+            if (totalEmprestimosAtivos >= 3) {
+                Console.WriteLine($"\nOperação negada: O usuário {usuario.Nome} já possui 3 empréstimos ativos.");
+                return false;
+            }
+
+            return true;
+        }
+
+        // código em construção outro dia termino
         public void RealizarEmprestimo() {
             if (ListaVazia(Materiais)) {
                 Console.WriteLine("Nenhum material Cadastrado!");
@@ -164,11 +167,39 @@ namespace Biblioteca_Escolar {
                 return;
             }
 
+            Usuario usuarioEncontrado = null;
+
+            Console.Write("Escreva a matrícula de quem vai pegar um livro: ");
+            string matriculausuario = Console.ReadLine() ?? "";
+            foreach (Usuario u in Usuarios) {
+                if (u.Matricula == matriculausuario) {
+                    usuarioEncontrado = u;
+                    if (PodeRealizarEmprestimo(usuarioEncontrado)) {
+                        
+                    }
+                    break;
+                }
+            }
+
+            if (usuarioEncontrado == null) {
+                Console.WriteLine($"Usuário com a matrícula \"{matriculausuario}\"não existe!");
+                return;
+            }
+
+            MaterialBiblioteca materialEncontrado = null;
+
             Console.Write("Escreva o código do material que deseja pedir emprestimo: ");
             string codigoBusca = Console.ReadLine() ?? "";
+            foreach (MaterialBiblioteca mb in Materiais) {
+                if (mb.Codigo == codigoBusca) {
+                    materialEncontrado = mb;
+                    break;
+                }
+            }
 
-            if (LivroExiste(codigoBusca)) {
-                
+            if (materialEncontrado == null) {
+                Console.WriteLine($"Material com o código \"{codigoBusca}\" não existe!");
+                return;
             }
 
         }
