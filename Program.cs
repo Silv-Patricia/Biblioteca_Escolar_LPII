@@ -64,6 +64,14 @@ namespace Biblioteca_Escolar
                      biblioteca.ListarUsuarios();
                     break;
 
+                    case 4:
+                     biblioteca.ListarMateriais();
+                    break;
+
+                    case 5:
+                     biblioteca.BuscarPorCodigo();
+                    break;
+
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;

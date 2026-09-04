@@ -100,23 +100,47 @@ namespace Biblioteca_Escolar {
 
         public void ListarUsuarios() {
             if (ListaVazia(Usuarios)) {
-                Console.WriteLine("Nenhum usuário cadastrado!, Impossivel exibir!");
+                Console.WriteLine("Nenhum usuário cadastrado!");
+                return;
             }
-            else {
-                foreach (Usuario u in Usuarios) {
-                    Console.WriteLine(u);
-                }
+            foreach (Usuario u in Usuarios) {
+                Console.WriteLine(u);
             }
+
         }
         public void ListarMateriais() {
             if (ListaVazia(Materiais)) {
-                Console.WriteLine("Lista Vazia!");
+                Console.WriteLine("Nenhum material Cadastrado!");
+                return;
+            }
+
+            foreach (Usuario u in Usuarios) {
+                Console.WriteLine(u);
+            }
+        }
+
+        public void BuscarPorCodigo() {
+            if (ListaVazia(Materiais)) {
+                Console.WriteLine("Nenhum material Cadastrado!");
+                return;
+            }
+            Console.Write("Escreva o código do material que deseja buscar: ");
+            string codigoBusca = Console.ReadLine() ?? "";
+
+            if (string.IsNullOrWhiteSpace(codigoBusca)) {
+                throw new ArgumentException("\nDigite um código para busca!", nameof(codigoBusca));
             }
             else {
-                foreach (Usuario u in Usuarios) {
-                    Console.WriteLine(u);
+                foreach (MaterialBiblioteca mb in Materiais) {
+                    if (mb.Codigo == codigoBusca) {
+                        Console.WriteLine(mb);
+                        return;
+                    }
+                Console.WriteLine($"Livro com código: \"{codigoBusca}\" não encontrado!");
                 }
             }
         }
+
+        
     }
 }
