@@ -69,7 +69,7 @@ namespace Biblioteca_Escolar
                     break;
 
                     case 5:
-                     biblioteca.BuscarPorCodigo();
+                     biblioteca.MostarBuscarPorCodigo();
                     break;
 
                     default:

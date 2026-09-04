@@ -118,8 +118,20 @@ namespace Biblioteca_Escolar {
                 Console.WriteLine(u);
             }
         }
+        public bool LivroExiste(string codigo) {
+            if (ListaVazia(Materiais)) {
+                return false;
+            }
 
-        public void BuscarPorCodigo() {
+            foreach (MaterialBiblioteca mb in Materiais) {
+                if (mb.Codigo == codigo) {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+        public void MostarBuscarPorCodigo() {
             if (ListaVazia(Materiais)) {
                 Console.WriteLine("Nenhum material Cadastrado!");
                 return;
@@ -136,11 +148,29 @@ namespace Biblioteca_Escolar {
                         Console.WriteLine(mb);
                         return;
                     }
-                Console.WriteLine($"Livro com código: \"{codigoBusca}\" não encontrado!");
+                    Console.WriteLine($"Livro com código: \"{codigoBusca}\" não encontrado!");
                 }
             }
         }
 
-        
+// código em construção outro dia termino
+        public void RealizarEmprestimo() {
+            if (ListaVazia(Materiais)) {
+                Console.WriteLine("Nenhum material Cadastrado!");
+                return;
+            }
+            if (ListaVazia(Usuarios)) {
+                Console.WriteLine("Nenhum usuário Cadastrado!");
+                return;
+            }
+
+            Console.Write("Escreva o código do material que deseja pedir emprestimo: ");
+            string codigoBusca = Console.ReadLine() ?? "";
+
+            if (LivroExiste(codigoBusca)) {
+                
+            }
+
+        }
     }
 }
