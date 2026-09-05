@@ -62,13 +62,13 @@ namespace Biblioteca_Escolar
         : base(codigo, titulo, ano)
         {
             if (string.IsNullOrWhiteSpace(autor))
-                throw new ArgumentException("O autor é obrigatório.", nameof(autor));
+                throw new ArgumentException("A autoria do livro é obrigatória.", nameof(autor));
             Autor = autor;
         }
         public override int ObterPrazoEmDias() => 7;
         public override double ObterMultaPorDia() => 1.50;
 
-        public override string ToString() => $"{base.ToString()} | Autor: {Autor}";
+        public override string ToString() => $"{base.ToString()} | Autor(a): {Autor}";
     }
 
     class Revista : MaterialBiblioteca

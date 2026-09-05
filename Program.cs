@@ -4,9 +4,10 @@ namespace Biblioteca_Escolar
     class Program
     {
         static Biblioteca biblioteca = new Biblioteca();
-        
+
         static void Main()
         {
+            Console.Clear();
             do
             {
                 int opcao = Menu.ExibirMenu();
@@ -22,29 +23,26 @@ namespace Biblioteca_Escolar
                         }
                         break;
                     case 1:
-                     biblioteca.CadastrarUsuario();
-                    break;
-
+                        biblioteca.CadastrarUsuario();
+                        break;
                     case 2:
-                     biblioteca.CadastrarMaterial();
-                    break;
-
+                        biblioteca.CadastrarMaterial();
+                        break;
                     case 3:
-                     biblioteca.ListarUsuarios();
-                    break;
-
+                        biblioteca.ListarUsuarios();
+                        break;
                     case 4:
-                     biblioteca.ListarMateriais();
-                    break;
-
+                        biblioteca.ListarMateriais();
+                        break;
                     case 5:
-                     biblioteca.MostarBuscarPorCodigo();
-                    break;
-
+                        biblioteca.ConsultarMaterialPorCodigo();
+                        break;
                     case 6:
-                     //biblioteca.RealizarEmprestimo();
-                    break;
-
+                        biblioteca.ConsultarUsuarioPorCodigo();
+                        break;
+                    case 11:
+                        biblioteca.AtualizaEmailDeUsuario();
+                        break;
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;
