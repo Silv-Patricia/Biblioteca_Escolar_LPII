@@ -13,7 +13,7 @@ namespace Biblioteca_Escolar
                 {
                     return valor;
                 }
-                Console.WriteLine("Entrada inválida! Digite um número inteiro.");
+                Console.WriteLine("\nEntrada inválida! Digite um número inteiro.");
             }
         }
 
@@ -51,11 +51,11 @@ namespace Biblioteca_Escolar
                     {
                         return dataValidada;
                     }
-                    Console.WriteLine("Erro: A data de devolução não pode estar no futuro.");
+                    Console.WriteLine("\nErro: A data de devolução não pode estar no futuro.");
                 }
                 else
                 {
-                    Console.WriteLine("Formato de data inválido. Use DD/MM/AAAA.");
+                    Console.WriteLine("\nFormato de data inválido. Use DD/MM/AAAA.");
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace Biblioteca_Escolar
                 }
                 else
                 {
-                    Console.WriteLine("Formato de data inválido. Use DD/MM/AAAA.");
+                    Console.WriteLine("\nFormato de data inválido. Use DD/MM/AAAA.");
                 }
             }
         }
@@ -98,7 +98,7 @@ namespace Biblioteca_Escolar
             Console.WriteLine("3 - Listar usuários\t\t9 - Exibir empréstimos ativos");
             Console.WriteLine("4 - Listar materiais\t\t10 - Exibir relatório");
             Console.WriteLine("5 - Consultar material\t\t11 - Atualizar e-mail de usuário");
-            Console.WriteLine("6 - Consultar usuário\t\t12 - Simular devolução");
+            Console.WriteLine("6 - Consultar usuário\t\t12 - Simular devolução com datas futuras");
             Console.WriteLine("0 - Sair da Execução");
             Console.WriteLine("*************************************************");
             return LerNumeroInteiro("Digite sua opção: ");

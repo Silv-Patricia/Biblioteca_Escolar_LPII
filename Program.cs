@@ -11,6 +11,7 @@ namespace Biblioteca_Escolar
             do
             {
                 int opcao = Menu.ExibirMenu();
+                Console.WriteLine();
                 switch (opcao)
                 {
                     case 0:
