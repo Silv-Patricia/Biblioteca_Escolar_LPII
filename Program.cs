@@ -55,6 +55,9 @@ namespace Biblioteca_Escolar
                     case 11:
                         biblioteca.AtualizaEmailDeUsuario();
                         break;
+                    case 12:
+                        biblioteca.TestarFuturaDataDeDevolucao();
+                        break;
                     default:
                         Console.WriteLine("\nOPÇÂO INVÁLIDA!");
                         break;

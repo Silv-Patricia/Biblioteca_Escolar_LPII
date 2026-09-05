@@ -1,3 +1,5 @@
+using System.Reflection.Metadata.Ecma335;
+
 namespace Biblioteca_Escolar {
 
     class Emprestimo {
@@ -24,27 +26,30 @@ namespace Biblioteca_Escolar {
         }
 
         public int CalcularAtraso(DateTime? dataInformada = null) {
-            DateTime dataParaCalcular;
+            DateTime dataDevolucao;
 
             if (DataDevolucaoReal != null) {
-                dataParaCalcular = DataDevolucaoReal.Value;
+                dataDevolucao = DataDevolucaoReal.Value;
             }
             else if (dataInformada != null) {
-                dataParaCalcular = dataInformada.Value;
+                dataDevolucao = dataInformada.Value;
             }
             else {
-                dataParaCalcular = DateTime.Now;
+                dataDevolucao = DateTime.Now;
             }
 
-            if (dataParaCalcular <= DataDevolucaoPrevista) {
+            if (dataDevolucao <= DataDevolucaoPrevista) {
                 return 0;
             }
-            TimeSpan tempoDeAtraso = dataParaCalcular - DataDevolucaoPrevista;
+            TimeSpan tempoDeAtraso = dataDevolucao - DataDevolucaoPrevista;
             return tempoDeAtraso.Days;
         }
 
-        public double CalcularMulta() {
-            int diasAtraso = CalcularAtraso();
+        public double CalcularMulta(DateTime? dataInformada = null) {
+            if (dataInformada < DataEmprestimo){
+                throw new ArgumentOutOfRangeException("A data de devolução é menor que a data de empréstimo!");
+            }
+            int diasAtraso = CalcularAtraso(dataInformada);
             if (diasAtraso != 0) {
                 return diasAtraso * MaterialBiblioteca.ObterMultaPorDia();
             }
@@ -54,6 +59,10 @@ namespace Biblioteca_Escolar {
         public bool RegistrarDevolucao(DateTime? dataInformada = null) {
             if (DataDevolucaoReal != null) {
                 Console.WriteLine("Erro: Este empréstimo já foi encerrado.");
+                return false;
+            }
+            if (dataInformada < DataEmprestimo){
+                Console.WriteLine("Erro: A data de devolução é menor que a data de empréstimo!");
                 return false;
             }
             if (dataInformada != null) {
