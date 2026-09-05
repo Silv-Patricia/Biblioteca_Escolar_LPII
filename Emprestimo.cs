@@ -6,7 +6,7 @@ namespace Biblioteca_Escolar {
         public DateTime DataEmprestimo { get; private set; }
         public DateTime DataDevolucaoPrevista { get; private set; }
         public DateTime? DataDevolucaoReal { get; private set; }
-        public String Situacao {
+        public string Situacao {
             get {
                 if (DataDevolucaoReal != null) return "Devolvido";
 
@@ -48,16 +48,16 @@ namespace Biblioteca_Escolar {
             if (diasAtraso != 0) {
                 return diasAtraso * MaterialBiblioteca.ObterMultaPorDia();
             }
-            return 0.0;
+            return 0;
         }
 
-        public bool RegistrarDevolucao(DateTime? dataInformadaParaTeste = null) {
+        public bool RegistrarDevolucao(DateTime? dataInformada = null) {
             if (DataDevolucaoReal != null) {
                 Console.WriteLine("Erro: Este empréstimo já foi encerrado.");
                 return false;
             }
-            if (dataInformadaParaTeste != null) {
-                DataDevolucaoReal = dataInformadaParaTeste.Value;
+            if (dataInformada != null) {
+                DataDevolucaoReal = dataInformada.Value;
             }
             else {
                 DataDevolucaoReal = DateTime.Now;
@@ -82,7 +82,7 @@ namespace Biblioteca_Escolar {
             string dataRetiradaFormatada = DataEmprestimo.ToString("dd/MM/yyyy");
             string prazoFormatado = DataDevolucaoPrevista.ToString("dd/MM/yyyy");
 
-            return $"Usuário: {Usuario.Nome} | Material: {MaterialBiblioteca.Titulo} | Retirada: {dataRetiradaFormatada} | Prazo: {prazoFormatado} | Situação: {Situacao}";
+            return $"Usuário: {Usuario.Nome} ({Usuario.Matricula}) | Material: {MaterialBiblioteca.Titulo} ({MaterialBiblioteca.Codigo}) | Retirada: {dataRetiradaFormatada} | Prazo: {prazoFormatado} | Situação: {Situacao}";
         }
     }
 }

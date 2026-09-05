@@ -68,7 +68,7 @@ namespace Biblioteca_Escolar
         public override int ObterPrazoEmDias() => 7;
         public override double ObterMultaPorDia() => 1.50;
 
-        public override string ToString() => $"{base.ToString()} | Autor(a): {Autor}";
+        public override string ToString() => $"[Livro] {base.ToString()} | Autor(a): {Autor}";
     }
 
     class Revista : MaterialBiblioteca
@@ -86,6 +86,6 @@ namespace Biblioteca_Escolar
         public override int ObterPrazoEmDias() => 3;
         public override double ObterMultaPorDia() => 1.00;
 
-        public override string ToString() => $"{base.ToString()} | Edição: {NumeroEdicao}";
+        public override string ToString() => $"[Revista] {base.ToString()} | Edição: {NumeroEdicao}";
     }
 }

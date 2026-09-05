@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Runtime.Intrinsics.X86;
 
 namespace Biblioteca_Escolar
 {
@@ -117,7 +118,7 @@ namespace Biblioteca_Escolar
             }
         }
 
-        public bool ListaVazia<T>(List<T> lista)
+        private bool ListaVazia<T>(List<T> lista)
         {
             if (lista.Count == 0)
             {
@@ -146,7 +147,6 @@ namespace Biblioteca_Escolar
                 Console.WriteLine("Nenhum material cadastrado!");
                 return;
             }
-
             foreach (MaterialBiblioteca mb in Materiais)
             {
                 Console.WriteLine(mb);
@@ -166,7 +166,7 @@ namespace Biblioteca_Escolar
 
             if (materialEncontrado != null)
             {
-                Console.WriteLine(materialEncontrado);
+                Console.WriteLine($"\nMaterial encontrado!\n{materialEncontrado}");
             }
             else
             {
@@ -188,14 +188,14 @@ namespace Biblioteca_Escolar
 
             if (usuarioEncontrado != null)
             {
-                Console.WriteLine(usuarioEncontrado);
+                Console.WriteLine($"\nUsuário encontrado!\n{usuarioEncontrado}");
             }
             else
             {
                 Console.WriteLine($"Usuário com a matrícula: \"{matricula}\" não encontrado!");
             }
         }
-        public bool PodeRealizarEmprestimo(Usuario usuario)
+        private bool PodeRealizarEmprestimo(Usuario usuario)
         {
             int totalEmprestimosAtivos = 0;
             foreach (Emprestimo emp in Emprestimos)
@@ -215,7 +215,7 @@ namespace Biblioteca_Escolar
             return true;
         }
 
-        public Usuario? UsuarioExiste(string matriculausuario)
+        private Usuario? UsuarioExiste(string matriculausuario)
         {
             foreach (Usuario u in Usuarios)
             {
@@ -227,7 +227,7 @@ namespace Biblioteca_Escolar
             return null;
         }
 
-        public MaterialBiblioteca? MaterialExiste(string codigoBusca)
+        private MaterialBiblioteca? MaterialExiste(string codigoBusca)
         {
             foreach (MaterialBiblioteca mb in Materiais)
             {
@@ -244,12 +244,12 @@ namespace Biblioteca_Escolar
         {
             if (ListaVazia(Materiais))
             {
-                Console.WriteLine("Nenhum material Cadastrado!");
+                Console.WriteLine("Nenhum material cadastrado!");
                 return;
             }
             if (ListaVazia(Usuarios))
             {
-                Console.WriteLine("Nenhum usuário Cadastrado!");
+                Console.WriteLine("Nenhum usuário cadastrado!");
                 return;
             }
 
@@ -273,7 +273,6 @@ namespace Biblioteca_Escolar
 
             if (PodeRealizarEmprestimo(usuarioEncontrado))
             {
-                // lógica para emprestrar o livro
                 if (materialEncontrado.Emprestar())
                 {
                     Emprestimo novoEmprestimo = new Emprestimo(usuarioEncontrado, materialEncontrado);
@@ -281,7 +280,8 @@ namespace Biblioteca_Escolar
                     Emprestimos.Add(novoEmprestimo);
 
                     Console.WriteLine("\nEmpréstimo realizado com sucesso!");
-                    Console.WriteLine($"Material: {materialEncontrado.Titulo}");
+                    Console.WriteLine($"Usuário: {usuarioEncontrado.Nome} ({usuarioEncontrado.Matricula})");
+                    Console.WriteLine($"Material: {materialEncontrado.Titulo} ({materialEncontrado.Codigo})");
                     Console.WriteLine($"Devolução prevista para: {novoEmprestimo.DataDevolucaoPrevista}");
                 }
                 else
@@ -289,6 +289,114 @@ namespace Biblioteca_Escolar
                     Console.WriteLine($"\nOperação negada, O material \"{materialEncontrado.Titulo}\" já se encontra emprestado no momento.");
                 }
             }
+        }
+
+        public void RealizarDevolucao()
+        {
+            if (ListaVazia(Emprestimos))
+            {
+                Console.WriteLine("Nenhum empréstimo registrado!");
+                return;
+            }
+
+            string codigoBusca = Menu.LerStringObrigatoria("Digite o código do material emprestado: ");
+            MaterialBiblioteca? material = MaterialExiste(codigoBusca);
+
+            if (material == null)
+            {
+                Console.WriteLine($"Material com o código \"{codigoBusca}\" não encontrado!");
+                return;
+            }
+
+            if (material.Disponivel)
+            {
+                Console.WriteLine($"O material \"{material.Titulo}\" já consta como disponível na biblioteca.");
+                return;
+            }
+
+            Emprestimo? emprestimoAtivo = null;
+            foreach (Emprestimo emp in Emprestimos)
+            {
+                if (emp.MaterialBiblioteca.Codigo == material.Codigo && emp.DataDevolucaoReal == null)
+                {
+                    emprestimoAtivo = emp;
+                    break;
+                }
+            }
+
+            if (emprestimoAtivo == null)
+            {
+                Console.WriteLine("Erro crítico: Material consta como indisponível, mas nenhum empréstimo ativo foi encontrado.");
+                return;
+            }
+
+            Console.WriteLine($"\nDevolvendo: {emprestimoAtivo.MaterialBiblioteca.Codigo} - {emprestimoAtivo.MaterialBiblioteca.Titulo} (Usuário: {emprestimoAtivo.Usuario.Nome})");
+
+            DateTime? dataInformada = Menu.LerDataOpcional("Digite a data de devolução (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
+
+            if (emprestimoAtivo.RegistrarDevolucao(dataInformada))
+            {
+                Console.WriteLine($"\nMaterial devolvido com sucesso!");
+            }
+        }
+
+        public void ExibirEmprestimosAtivos()
+        {
+            if (ListaVazia(Emprestimos))
+            {
+                Console.WriteLine("Nenhum empréstimo registrado!");
+                return;
+            }
+            foreach (Emprestimo em in Emprestimos)
+            {
+                if (em.DataDevolucaoReal == null)
+                {
+                    Console.WriteLine(em);
+                }
+            }
+        }
+
+        public void GerarRelatorio()
+        {
+            Console.WriteLine("-------- RELATÓRIO --------");
+            Console.WriteLine($"Quantidade de usuários: {Usuarios.Count}");
+            int quantidadeLivros = 0, quantidadeRevistas = 0, materiaisDisponiveis = 0;
+            foreach (MaterialBiblioteca mb in Materiais)
+            {
+                if (mb is Livro)
+                {
+                    quantidadeLivros++;
+                }
+                else
+                {
+                    quantidadeRevistas++;
+                }
+                if (mb.Disponivel)
+                {
+                    materiaisDisponiveis++;
+                }
+            }
+            Console.WriteLine($"Quantidade de Livros: {quantidadeLivros}");
+            Console.WriteLine($"Quantidade de Revistas: {quantidadeRevistas}");
+            Console.WriteLine($"Quantidade de materiais disponíveis: {materiaisDisponiveis}");
+
+            int emprestimosAtivos = 0, devolucoesAtrasadas = 0;
+            double valorTotalMultas = 0;
+            foreach (Emprestimo em in Emprestimos)
+            {
+                if (em.DataDevolucaoReal == null)
+                {
+                    emprestimosAtivos++;
+                }
+                if (em.DataDevolucaoPrevista < DateTime.Now.Date && em.DataDevolucaoReal == null)
+                {
+                    devolucoesAtrasadas++;
+                }
+                valorTotalMultas+= em.CalcularMulta();
+            }
+            Console.WriteLine($"Quantidade de empréstimos ativos: {emprestimosAtivos}");
+            Console.WriteLine($"Valor total de multas: R${valorTotalMultas:F2}");
+            Console.WriteLine("---------------------------");
         }
     }
 }

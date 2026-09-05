@@ -40,6 +40,18 @@ namespace Biblioteca_Escolar
                     case 6:
                         biblioteca.ConsultarUsuarioPorCodigo();
                         break;
+                    case 7:
+                        biblioteca.RealizarEmprestimo();
+                        break;
+                    case 8:
+                        biblioteca.RealizarDevolucao();
+                        break;
+                    case 9:
+                        biblioteca.ExibirEmprestimosAtivos();
+                        break;
+                    case 10:
+                        biblioteca.GerarRelatorio();
+                        break;
                     case 11:
                         biblioteca.AtualizaEmailDeUsuario();
                         break;
