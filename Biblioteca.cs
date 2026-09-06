@@ -240,7 +240,9 @@ namespace Biblioteca_Escolar {
 
             if (PodeRealizarEmprestimo(usuarioEncontrado)) {
                 if (materialEncontrado.Emprestar()) {
-                    Emprestimo novoEmprestimo = new Emprestimo(usuarioEncontrado, materialEncontrado);
+                    DateTime? dataInformada = Menu.LerDataOpcional("Digite a data do empréstimo (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
+
+                    Emprestimo novoEmprestimo = new Emprestimo(usuarioEncontrado, materialEncontrado, dataInformada);
 
                     Emprestimos.Add(novoEmprestimo);
 

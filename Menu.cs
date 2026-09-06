@@ -51,7 +51,7 @@ namespace Biblioteca_Escolar
                     {
                         return dataValidada;
                     }
-                    Console.WriteLine("\nErro: A data de devolução não pode estar no futuro.");
+                    Console.WriteLine("\nErro: A data informada não pode estar no futuro.\n");
                 }
                 else
                 {

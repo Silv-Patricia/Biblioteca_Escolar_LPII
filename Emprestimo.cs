@@ -16,10 +16,15 @@ namespace Biblioteca_Escolar {
             }
         }
 
-        public Emprestimo(Usuario usuario, MaterialBiblioteca materialBiblioteca) {
+        public Emprestimo(Usuario usuario, MaterialBiblioteca materialBiblioteca, DateTime? dataInformada) {
             Usuario = usuario;
             MaterialBiblioteca = materialBiblioteca;
-            DataEmprestimo = DateTime.Now;
+            if (dataInformada != null) {
+                DataEmprestimo = dataInformada.Value;
+            }
+            else {
+                DataEmprestimo = DateTime.Now;
+            }
 
             int prazo = materialBiblioteca.ObterPrazoEmDias();
             DataDevolucaoPrevista = DataEmprestimo.AddDays(prazo);
