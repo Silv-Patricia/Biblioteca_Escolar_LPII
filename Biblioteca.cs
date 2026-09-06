@@ -240,7 +240,7 @@ namespace Biblioteca_Escolar {
 
             if (PodeRealizarEmprestimo(usuarioEncontrado)) {
                 if (materialEncontrado.Emprestar()) {
-                    DateTime? dataInformada = Menu.LerDataOpcional("Digite a data do empréstimo (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
+                    DateTime? dataInformada = Menu.LerDataAtualOuPassada("Digite a data do empréstimo (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
 
                     Emprestimo novoEmprestimo = new Emprestimo(usuarioEncontrado, materialEncontrado, dataInformada);
 
@@ -291,7 +291,7 @@ namespace Biblioteca_Escolar {
 
             Console.WriteLine($"\nDevolvendo: {emprestimoAtivo.MaterialBiblioteca.Codigo} - {emprestimoAtivo.MaterialBiblioteca.Titulo} (Usuário: {emprestimoAtivo.Usuario.Nome} - {emprestimoAtivo.Usuario.Matricula})");
 
-            DateTime? dataInformada = Menu.LerDataOpcional("Digite a data de devolução (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
+            DateTime? dataInformada = Menu.LerDataAtualOuPassada("Digite a data de devolução (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
 
             if (emprestimoAtivo.RegistrarDevolucao(dataInformada)) {
                 Console.WriteLine($"\nMaterial devolvido com sucesso!");
@@ -332,7 +332,7 @@ namespace Biblioteca_Escolar {
 
             Console.WriteLine($"\nTestando devolução para: {emprestimoAtivo.MaterialBiblioteca.Codigo} - {emprestimoAtivo.MaterialBiblioteca.Titulo} (Usuário: {emprestimoAtivo.Usuario.Nome} - {emprestimoAtivo.Usuario.Matricula})");
 
-            DateTime? dataInformada = Menu.LerData("Digite a data simulada (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
+            DateTime? dataInformada = Menu.LerQualquerData("Digite a data simulada (DD/MM/AAAA) ou pressione Enter para usar a data de hoje: ");
 
             try {
                 double multa = emprestimoAtivo.CalcularMulta(dataInformada);

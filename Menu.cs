@@ -1,31 +1,23 @@
-namespace Biblioteca_Escolar
-{
-    class Menu
-    {
+namespace Biblioteca_Escolar {
+    class Menu {
         public static string LeEntrada() => Console.ReadLine() ?? "";
 
-        public static int LerNumeroInteiro(string mensagem)
-        {
-            while (true)
-            {
+        public static int LerNumeroInteiro(string mensagem) {
+            while (true) {
                 Console.Write(mensagem);
-                if (int.TryParse(Console.ReadLine(), out int valor))
-                {
+                if (int.TryParse(Console.ReadLine(), out int valor)) {
                     return valor;
                 }
                 Console.WriteLine("\nEntrada inválida! Digite um número inteiro.");
             }
         }
 
-        public static string LerStringObrigatoria(string mensagem)
-        {
-            while (true)
-            {
+        public static string LerStringObrigatoria(string mensagem) {
+            while (true) {
                 Console.Write(mensagem);
                 string entrada = Console.ReadLine()?.Trim() ?? "";
 
-                if (!string.IsNullOrWhiteSpace(entrada))
-                {
+                if (!string.IsNullOrWhiteSpace(entrada)) {
                     return entrada;
                 }
 
@@ -33,65 +25,52 @@ namespace Biblioteca_Escolar
             }
         }
 
-        public static DateTime? LerDataOpcional(string mensagem)
-        {
-            while (true)
-            {
+        public static DateTime? LerDataAtualOuPassada(string mensagem) {
+            while (true) {
                 Console.Write(mensagem);
                 string entrada = Console.ReadLine()?.Trim() ?? "";
 
-                if (string.IsNullOrWhiteSpace(entrada))
-                {
+                if (string.IsNullOrWhiteSpace(entrada)) {
                     return null;
                 }
 
-                if (DateTime.TryParse(entrada, out DateTime dataValidada))
-                {
-                    if (dataValidada <= DateTime.Now.Date)
-                    {
+                if (DateTime.TryParse(entrada, out DateTime dataValidada)) {
+                    if (dataValidada <= DateTime.Now.Date) {
                         return dataValidada;
                     }
                     Console.WriteLine("\nErro: A data informada não pode estar no futuro.\n");
                 }
-                else
-                {
+                else {
                     Console.WriteLine("\nFormato de data inválido. Use DD/MM/AAAA.");
                 }
             }
         }
 
-        public static DateTime? LerData(string mensagem)
-        {
-            while (true)
-            {
+        public static DateTime? LerQualquerData(string mensagem) {
+            while (true) {
                 Console.Write(mensagem);
                 string entrada = Console.ReadLine()?.Trim() ?? "";
 
-                if (string.IsNullOrWhiteSpace(entrada))
-                {
+                if (string.IsNullOrWhiteSpace(entrada)) {
                     return null;
                 }
 
-                if (DateTime.TryParse(entrada, out DateTime dataValidada))
-                {
+                if (DateTime.TryParse(entrada, out DateTime dataValidada)) {
                     return dataValidada;
                 }
-                else
-                {
+                else {
                     Console.WriteLine("\nFormato de data inválido. Use DD/MM/AAAA.");
                 }
             }
         }
 
-        public static void PausarELimpar()
-        {
+        public static void PausarELimpar() {
             Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey(true);
             Console.Clear();
         }
 
-        public static int ExibirMenu()
-        {
+        public static int ExibirMenu() {
             Console.WriteLine("\n********************** MENU *********************");
             Console.WriteLine("1 - Cadastrar usuário\t\t7 - Realizar empréstimo");
             Console.WriteLine("2 - Cadastrar material\t\t8 - Registrar devolução");
