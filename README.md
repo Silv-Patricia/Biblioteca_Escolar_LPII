@@ -7,7 +7,7 @@ Uma aplicação de console robusta desenvolvida em C# para o gerenciamento compl
 * **Gestão de Usuários:** Cadastro seguro com validação de campos obrigatórios e garantia de unicidade de matrícula. Suporte à atualização de dados (e-mail).
 * **Gestão de Acervo (Polimorfismo):** Cadastro dinâmico de `Livros` e `Revistas`, com regras específicas de negócio (prazos e multas diferenciados) herdadas de uma classe abstrata comum.
 * **Empréstimos Inteligentes:** Validação rigorosa de regras de negócio (limite máximo de 3 empréstimos ativos por usuário, bloqueio de itens já emprestados).
-* **Devoluções e Multas:** Baixa de empréstimos com cálculo automático de dias de atraso e valor de multas baseado no tipo do material.
+* **Simulador de Empréstimos e Devoluções:** Módulo de testes integrado e sobrecarga de construtores que permite simular datas customizadas tanto para a retirada quanto para devoluções futuras, projetando cálculos de prazos e multas para casos de uso atípicos.
 * **Simulador de Devolução:** Módulo de testes integrado que permite simular devoluções em datas futuras para projetar cálculos de multas sem afetar o banco de dados em memória.
 * **Relatórios e Consultas:** Geração de tabelas formatadas e dinâmicas (utilizando LINQ) para listagem de acervo, usuários, empréstimos ativos e consolidação financeira das multas.
 

@@ -69,10 +69,10 @@ namespace Biblioteca_Escolar {
             string titulo = Menu.LerStringObrigatoria("Digite o título: ");
 
             int ano = Menu.LerNumeroInteiro("Digite o ano de publicação: ");
-            while (ano > DateTime.Now.Year) {
-                Console.WriteLine("\nO ano deve ser menor ou igual ao atual!");
-                ano = Menu.LerNumeroInteiro("Digite o ano de publicação: ");
-            }
+            while (ano <= 0 || ano > DateTime.Now.Year) {
+            Console.WriteLine("\nO ano deve ser maior que zero e menor ou igual ao atual!");
+            ano = Menu.LerNumeroInteiro("Digite o ano de publicação: ");
+}
 
             try {
                 if (opc == 1) {
@@ -99,7 +99,7 @@ namespace Biblioteca_Escolar {
             }
         }
 
-        private bool ListaVazia<T>(List<T> lista) {
+        private static bool ListaVazia<T>(List<T> lista) {
             if (lista.Count == 0) {
                 return true;
             }
