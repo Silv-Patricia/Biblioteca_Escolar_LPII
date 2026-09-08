@@ -60,4 +60,5 @@ Como a aplicação foi desenvolvida em .NET, é necessário ter o [SDK do .NET](
 ## 👨‍💻 Autores
 
 **[Valdir Neto](https://github.com/valdirneto34)** & **[Patrícia Silva](https://github.com/Silv-Patricia)**
+
 Estudantes de Sistemas de Informação no IFMG-SJE.
