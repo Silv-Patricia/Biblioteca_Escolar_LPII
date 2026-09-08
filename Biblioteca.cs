@@ -30,6 +30,11 @@ namespace Biblioteca_Escolar {
         }
 
         public void AtualizaEmailDeUsuario() {
+            if (ListaVazia(Usuarios)) {
+                Console.WriteLine("Nenhum usuário cadastrado!");
+                return;
+            }
+
             string matricula = Menu.LerStringObrigatoria("Digite a matrícula do usuário: ");
             Usuario? usuario = UsuarioExiste(matricula);
 
